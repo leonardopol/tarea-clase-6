@@ -18,6 +18,28 @@ function calcularMayorEdad(){
     return mayor;
 }
 
+function calcularMenorEdad(){
+    const $cantidadFamiliares = Number(document.querySelector("#cantidadFamiliares").value); 
+    let menor = 200;
+    for(let i = 0; i < $cantidadFamiliares; i++){
+        let $entradaEdades = Number(document.querySelector(`#familiarr${i}`).value);
+        if($entradaEdades < menor){
+            menor = $entradaEdades;
+        }
+    }
+    return menor;
+}
+
+function calcularPromedioEdad(){
+    const $cantidadFamiliares = Number(document.querySelector("#cantidadFamiliares").value);
+    let suma = 0;
+    for(let i = 0; i < $cantidadFamiliares; i++){
+        let $entradaEdades = Number(document.querySelector(`#familiarr${i}`).value);
+        suma += $entradaEdades;
+    }
+    return suma / $cantidadFamiliares;
+}
+
 document.querySelector("#boton-enviar").onclick = function(){
     const $cantidadFamiliares = Number(document.querySelector("#cantidadFamiliares").value);
     const $nodoDiv = document.querySelector("#mostrar-familiares");
@@ -45,6 +67,10 @@ document.querySelector("#boton-enviar").onclick = function(){
 
 document.querySelector("#boton-calcular").onclick = function(){
     const mayorEdad = calcularMayorEdad();
+    const menorEdad = calcularMenorEdad();
+    const promedioEdad = calcularPromedioEdad();
     console.log(mayorEdad);
+    console.log(menorEdad);
+    console.log(promedioEdad);
     return false;
 }
