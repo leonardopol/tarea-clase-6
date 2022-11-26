@@ -6,6 +6,18 @@ Al hacer click en "calcular", mostrar en un elemento pre-existente la mayor edad
 Punto bonus: Crear un botón para "empezar de nuevo" que empiece el proceso nuevamente, borrando los inputs ya creados (investigar cómo en MDN).
 */
 
+function calcularMayorEdad(){
+    const $cantidadFamiliares = Number(document.querySelector("#cantidadFamiliares").value);
+    let mayor = 0;
+    for(let i = 0; i < $cantidadFamiliares; i++){
+        let $entradaEdades = Number(document.querySelector(`#familiarr${i}`).value);
+        if($entradaEdades > mayor){
+            mayor = $entradaEdades;
+        }
+    }
+    return mayor;
+}
+
 document.querySelector("#boton-enviar").onclick = function(){
     const $cantidadFamiliares = Number(document.querySelector("#cantidadFamiliares").value);
     const $nodoDiv = document.querySelector("#mostrar-familiares");
@@ -19,6 +31,7 @@ document.querySelector("#boton-enviar").onclick = function(){
         $textLabels = document.createTextNode(`Edad familiar ${i + 1}`);
         $inputs[i] = document.createElement("input");
         $inputs[i].type = "number";
+        $inputs[i].id = `familiarr${i}`;
         $saltoDeLinea[i] = document.createElement("br");
         $nodoDiv.appendChild($saltoDeLinea[i]);
         $nodoDiv.appendChild($labels[i]);
@@ -27,5 +40,11 @@ document.querySelector("#boton-enviar").onclick = function(){
         
         $nodoDiv.appendChild($inputs[i]);
     } 
+    return false;
+}
+
+document.querySelector("#boton-calcular").onclick = function(){
+    const mayorEdad = calcularMayorEdad();
+    console.log(mayorEdad);
     return false;
 }
