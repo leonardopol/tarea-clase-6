@@ -40,6 +40,28 @@ function calcularPromedioEdad(){
     return suma / $cantidadFamiliares;
 }
 
+function mostrarResultados(){
+    $nodoBody = document.querySelector("body");
+    $nododivResultados = document.createElement("div");
+    $pMayorEdad = document.createElement("p");
+    $pMenorEdad = document.createElement("p");
+    $pPromedioEdad = document.createElement("p");
+    $nododivResultados.id = "resultados";
+    const mayorEdad = calcularMayorEdad();
+    const menorEdad = calcularMenorEdad();
+    const promedioEdad = calcularPromedioEdad();
+    $textoMayorEdad = document.createTextNode(`El familiar de mayor edad es: ${mayorEdad}`);
+    $textoMenorEdad = document.createTextNode(`El familiar de menor edad es: ${menorEdad}`);
+    $textoPromedioEdad = document.createTextNode(`El Promedio de edad es: ${promedioEdad}`);
+    $nodoBody.appendChild($nododivResultados);
+    $nododivResultados.appendChild($pMayorEdad);
+    $nododivResultados.appendChild($pMenorEdad);
+    $nododivResultados.appendChild($pPromedioEdad);
+    $pMayorEdad.appendChild($textoMayorEdad);
+    $pMenorEdad.appendChild($textoMenorEdad);
+    $pPromedioEdad.appendChild($textoPromedioEdad);
+}
+
 document.querySelector("#boton-enviar").onclick = function(){
     const $cantidadFamiliares = Number(document.querySelector("#cantidadFamiliares").value);
     const $nodoDiv = document.querySelector("#mostrar-familiares");
@@ -66,11 +88,8 @@ document.querySelector("#boton-enviar").onclick = function(){
 }
 
 document.querySelector("#boton-calcular").onclick = function(){
-    const mayorEdad = calcularMayorEdad();
-    const menorEdad = calcularMenorEdad();
-    const promedioEdad = calcularPromedioEdad();
-    console.log(mayorEdad);
-    console.log(menorEdad);
-    console.log(promedioEdad);
+    
+    
+    const resultado = mostrarResultados();
     return false;
 }
