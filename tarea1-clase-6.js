@@ -50,8 +50,8 @@ function mostrarResultados(){
     const mayorEdad = calcularMayorEdad();
     const menorEdad = calcularMenorEdad();
     const promedioEdad = calcularPromedioEdad();
-    $textoMayorEdad = document.createTextNode(`El familiar de mayor edad es: ${mayorEdad}`);
-    $textoMenorEdad = document.createTextNode(`El familiar de menor edad es: ${menorEdad}`);
+    $textoMayorEdad = document.createTextNode(`El familiar de mayor edad tiene: ${mayorEdad}`);
+    $textoMenorEdad = document.createTextNode(`El familiar de menor edad tiene: ${menorEdad}`);
     $textoPromedioEdad = document.createTextNode(`El Promedio de edad es: ${promedioEdad}`);
     $nodoBody.appendChild($nododivResultados);
     $nododivResultados.appendChild($pMayorEdad);
@@ -92,4 +92,9 @@ document.querySelector("#boton-calcular").onclick = function(){
     
     const resultado = mostrarResultados();
     return false;
+}
+
+document.querySelector("#boton-resetear").onclick = function(){
+
+    
 }
