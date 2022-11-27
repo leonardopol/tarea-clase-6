@@ -95,6 +95,14 @@ document.querySelector("#boton-calcular").onclick = function(){
 }
 
 document.querySelector("#boton-resetear").onclick = function(){
-
+    const $cantidadFamiliares = document.querySelector("#cantidadFamiliares").setContent("");
+    $nodoBody.removeChild($nododivResultados);
+    $nododivResultados.removeChild($pMayorEdad);
+    $nododivResultados.removeChild($pMenorEdad);
+    $nododivResultados.removeChild($pPromedioEdad);
+    $pMayorEdad.removeChild($textoMayorEdad);
+    $pMenorEdad.removeChild($textoMenorEdad);
+    $pPromedioEdad.removeChild($textoPromedioEdad);
+    return false;
     
 }
