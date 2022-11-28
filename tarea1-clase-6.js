@@ -37,7 +37,7 @@ function calcularPromedioEdad(){
         let $entradaEdades = Number(document.querySelector(`#familiarr${i}`).value);
         suma += $entradaEdades;
     }
-    return suma / $cantidadFamiliares;
+    return (suma / $cantidadFamiliares).toFixed(2);
 }
 
 function mostrarResultados(){
