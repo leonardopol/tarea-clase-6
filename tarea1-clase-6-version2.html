@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='tarea1-clase-6-version2.css'>
+    
+</head>
+<body>
+        <form id="numero-familiares" class="visible">
+            <label for="cantidad-familiares">Ingrese cantidad de familiares</label>
+            <input type="number" placeholder="Ej..3" id="cantidad-familiares">
+            <button type="submit" id="boton-enviar">enviar</button>
+
+            <div id="crearFamiliares">
+                
+            </div>
+            <div id="boton-calcular" class="oculto">
+                <button type="submit">Calcular</button>
+            </div>
+
+            <div id="mostrar-resultados" class="oculto">
+                <p>EL mayor es: <strong id="mayor-edad"></strong></p>
+                <p>EL menor es: <strong id="menor-edad"></strong></p>
+                <p>EL promedio es: <strong id="promedio-edad"></strong></p>
+                <button type="submit" id="boton-reset">resetear</button>
+            </div>
+        </form>
+    <script src='tarea1-clase-6-calculos-version2.js'></script>
+    <script src='tarea1-clase-6-version2.js'></script>
+</body>
+</html>
