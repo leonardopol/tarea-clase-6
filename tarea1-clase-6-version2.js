@@ -18,13 +18,14 @@ Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como
 
 
 
-document.querySelector("#boton-enviar").onclick = function(){
+document.querySelector("#boton-enviar").onclick = function(event){
     const indice = obtenerCantidadFamiliares();
     if(indice > 0){
+        
         crearFamiliares(indice);
         mostrarBotonCalcular();
     }
-return false;
+event.preventDefault();
 }
 
 function obtenerCantidadFamiliares(){
@@ -50,7 +51,7 @@ for(let i = 0; i < indice; i++){
     $nodoDiv.appendChild($labels);
     $nodoDiv.appendChild($inputs);
     $nodoDiv.appendChild($saltoDeLinea);
-}
+    }
 }
 
 function mostrarBotonCalcular(){
