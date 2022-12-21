@@ -17,15 +17,20 @@ Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como
 */
 
 
-
+let contador = 0;
 document.querySelector("#boton-enviar").onclick = function(event){
     const indice = obtenerCantidadFamiliares();
-    if(indice > 0){
-        console.log(document.querySelector(".integrante"));
+    if(indice > 0 && contador === 0){
+        
+        crearFamiliares(indice);
+        mostrarBotonCalcular();
+        contador ++;
+    } else {
+        borrarFamiliares();
         crearFamiliares(indice);
         mostrarBotonCalcular();
     }
-event.preventDefault();
+    event.preventDefault();
 }
 
 function obtenerCantidadFamiliares(){
@@ -53,6 +58,12 @@ for(let i = 0; i < indice; i++){
     $nodoDiv.appendChild($inputs);
     $nodoDiv.appendChild($saltoDeLinea);
     }
+}
+
+function borrarFamiliares(){
+    $nodoDiv.removeChild($labels);
+    $nodoDiv.removeChild($inputs);
+    $nodoDiv.removeChild($saltoDeLinea);
 }
 
 function mostrarBotonCalcular(){
