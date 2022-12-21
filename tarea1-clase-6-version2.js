@@ -21,7 +21,7 @@ Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como
 document.querySelector("#boton-enviar").onclick = function(event){
     const indice = obtenerCantidadFamiliares();
     if(indice > 0){
-        
+        console.log(document.querySelector(".integrante"));
         crearFamiliares(indice);
         mostrarBotonCalcular();
     }
@@ -38,6 +38,7 @@ if($cantidadFamiliares > 0){
 function crearFamiliares(indice){
 for(let i = 0; i < indice; i++){
     let $nodoDiv = document.querySelector("#crearFamiliares");
+    $nodoDiv.className = "integrante";
     let $labels = document.createElement("labels");
     let $inputs = document.createElement("input");
     
