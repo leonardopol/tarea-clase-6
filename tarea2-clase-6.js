@@ -6,19 +6,35 @@ Al hacer click en "calcular", mostrar en un elemento pre-existente el mayor sala
 Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como 0).
 */
 
+let indice = 0;
 document.querySelector("#boton-agregar").onclick = function(){
-    agregarEntrada();
+    agregarSalario();
 }
 
 document.querySelector("#boton-quitar").onclick = function(){
-    console.log("quitado");
+    quitarSalario();
 }
 
-function agregarEntrada(){
-    const $nodoDivEntradas = document.querySelector("#vista-entradas");
-    const $labels = document.createElement("label");
-    const $inputs = document.querySelector("input");
-    //$labels.id=""
-    $nodoDivEntradas.appendChild($labels);
-    $nodoDivEntradas.appendChild($inputs);
+function agregarSalario(){
+    const $div = document.createElement("div");
+    $div.className = `integrante${indice}`;
+    const $label = document.createElement("label");
+    $label.textContent = `Salario#${indice + 1}`;
+    $label.id = `integrante#${indice}`;
+    const $input = document.createElement("input");
+    $input.type = "number";
+    
+    $div.appendChild($label);
+    $div.appendChild($input);
+    const $integrantes = document.querySelector("#integrantes");
+    $integrantes.appendChild($div);
+    indice++;
 }
+
+function quitarSalario(){
+    if(indice > 0){
+    const $integrantes = document.querySelector(`#integrantes .integrante${indice - 1}`);
+    $integrantes.remove();
+    indice--;}
+}
+console.log(indice);
