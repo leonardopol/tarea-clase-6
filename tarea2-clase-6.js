@@ -49,9 +49,9 @@ function quitarSalario(){
 
 function calcular(){
     mostrarMayorSalario('mayor', calcularMayorSalarioAnual());
-    mostrarMenorSalario('menor', calcularMayorSalarioAnual());
-    mostrarPromedioSalarioAnual('promedioAnual', calcularMayorSalarioAnual());
-    mostrarPromedioSalarioMensual('promedioMensual', calcularMayorSalarioAnual());
+    mostrarMenorSalario('menor', calcularMenorSalarioAnual());
+    mostrarPromedioSalarioAnual('promedioAnual', calcularSalarioPromedioAnual());
+    mostrarPromedioSalarioMensual('promedioMensual', calcularSalarioPromedioMensual());
     mostrarResultados();
     ocultarBotonCalcular();
 }
