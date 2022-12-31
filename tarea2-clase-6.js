@@ -48,20 +48,48 @@ function quitarSalario(){
 }
 
 function calcular(){
-    const mayor = calcularMayorSalarioAnual();
-    const menor = calcularMenorSalarioAnual();
-    const promedio = calcularSalarioPromedioAnual();
-    const promedioMensual = calcularSalarioPromedioMensual();
-    console.log(mayor);
-    console.log(menor);
-    console.log(promedio);
-    console.log(promedioMensual);
+    mostrarMayorSalario('mayor', calcularMayorSalarioAnual());
+    mostrarMenorSalario('menor', calcularMayorSalarioAnual());
+    mostrarPromedioSalarioAnual('promedioAnual', calcularMayorSalarioAnual());
+    mostrarPromedioSalarioMensual('promedioMensual', calcularMayorSalarioAnual());
+    mostrarResultados();
+    ocultarBotonCalcular();
+}
+
+function ocultarBotonCalcular(){
+    document.querySelector("#boton-calcular").className = "oculto";
+}
+
+function mostrarBotonCalcular(){
+    document.querySelector("#boton-calcular").className = "";
+}
+
+function mostrarResultados(){
+    document.querySelector("#mostrar-resultados").className = 'visible';
+}
+
+function mostrarMayorSalario(tipo, valor) {
+    document.querySelector(`#${tipo}-salario`).textContent = valor;
+}
+
+function mostrarMenorSalario(tipo, valor) {
+    document.querySelector(`#${tipo}-salario`).textContent = valor;
+}
+
+function mostrarPromedioSalarioAnual(tipo, valor) {
+    document.querySelector(`#${tipo}-salario`).textContent = valor;
+}
+
+function mostrarPromedioSalarioMensual(tipo, valor) {
+    document.querySelector(`#${tipo}-salario`).textContent = valor;
 }
 
 function resetear(){
     for(let i = 0; i < indice; i++){
     const $integrantes = document.querySelector(`#integrantes .integrante${i}`);
     $integrantes.remove();
+    document.querySelector("#mostrar-resultados").className ="oculto";
+    mostrarBotonCalcular();
     }
     indice = 0;
 }

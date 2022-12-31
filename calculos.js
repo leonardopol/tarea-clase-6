@@ -8,7 +8,7 @@ function calcularMayorSalarioAnual(){
             }
         }
     }
-    return mayor;
+    return (mayor).toFixed(2);
 }
 
 function calcularMenorSalarioAnual(){
@@ -21,7 +21,7 @@ function calcularMenorSalarioAnual(){
             }
         }
     }
-    return menor;
+    return (menor).toFixed(2);
 }
 
 function calcularSalarioPromedioAnual(){
@@ -32,11 +32,11 @@ function calcularSalarioPromedioAnual(){
            suma += $salario;
         }
     }
-    return suma / indice;
+    return (suma / indice).toFixed(2);
 }
 
 function calcularSalarioPromedioMensual(){
     const MESES_DEL_ANIO = 12;
     const promedioAnual = calcularSalarioPromedioAnual();
-    return promedioAnual / MESES_DEL_ANIO;
+    return (promedioAnual / MESES_DEL_ANIO).toFixed(2);
 }
