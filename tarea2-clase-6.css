@@ -1,8 +1,30 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    margin: 20px;
+    padding: 20px;
+}
+
 .oculto {
     display: none;
 }
 
 h1 {
+    margin: 5px;
+    padding: 5px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: blue;
 }
+
+.botones-principales {
+    margin: 10px;
+}
+
+.botones-calcularYreset {
+    margin: 25px;
+    padding: 25px;
+}
+
