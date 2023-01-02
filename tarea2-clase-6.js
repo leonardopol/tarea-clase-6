@@ -12,8 +12,9 @@ document.querySelector("#boton-agregar").onclick = function(event){
     event.preventDefault();
 }
 
-document.querySelector("#boton-quitar").onclick = function(){
+document.querySelector("#boton-quitar").onclick = function(event){
     quitarSalario();
+    event.preventDefault();
 }
 
 document.querySelector("#boton-calcular").onclick = function(event){

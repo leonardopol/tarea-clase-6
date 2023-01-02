@@ -13,18 +13,16 @@ body {
 }
 
 h1 {
-    margin: 5px;
-    padding: 5px;
+    
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: blue;
 }
 
 .botones-principales {
-    margin: 10px;
+    
 }
 
 .botones-calcularYreset {
-    margin: 25px;
-    padding: 25px;
+    
 }
 
