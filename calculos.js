@@ -12,7 +12,7 @@ function calcularMayorSalarioAnual(){
 }
 
 function calcularMenorSalarioAnual(){
-    let menor = 9999999999999999999;
+    let menor = Infinity;
     for(let i = 0; i < indice; i++){
         let $salario = Number(document.querySelector(`#salario${i}`).value);
         if($salario !== 0){
