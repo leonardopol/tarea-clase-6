@@ -26,18 +26,17 @@ document.querySelector("#boton-enviar").onclick = function(event){
         mostrarBotonCalcular();
         contador ++;
     } else {
-        borrarFamiliares();
+        //borrarFamiliares();
         crearFamiliares(indice);
-        mostrarBotonCalcular();
+        //mostrarBotonCalcular();
     }
     event.preventDefault();
 }
 
 function obtenerCantidadFamiliares(){
-const $cantidadFamiliares = Number(document.querySelector("#cantidad-familiares").value);
-if($cantidadFamiliares > 0){
-        return $cantidadFamiliares;
-}
+const $familiares = Number(document.querySelector("#cantidad-familiares").value);
+const $cantidadFamiliares = validarCantidadFamiliares($familiares);
+return $cantidadFamiliares;
 }
 
 function crearFamiliares(indice){
@@ -101,6 +100,11 @@ const $resultados = document.querySelector(`#${tipo}-edad`).textContent = valor;
 
 function visibilizarResultados(){
 document.querySelector(".oculto").className = "";
+}
+
+function visibilizarErrores(error){
+    document.querySelector("#mostrar-errores").className = "";
+    document.querySelector("#error").textContent = error;
 }
 
 function resetear(){
