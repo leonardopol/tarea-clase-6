@@ -35,8 +35,15 @@ document.querySelector("#boton-enviar").onclick = function(event){
 
 function obtenerCantidadFamiliares(){
 const $familiares = Number(document.querySelector("#cantidad-familiares").value);
+console.log($familiares);
 const $cantidadFamiliares = validarCantidadFamiliares($familiares);
-return $cantidadFamiliares;
+    if($cantidadFamiliares !== 'El numero no puede tener decimales' && $cantidadFamiliares !== 'El campo no puede estar vacio'){
+        //console.log($cantidadFamiliares);
+        return $cantidadFamiliares
+    }else {
+        let error = 'El numero no puede contener decimales y el campo no puede estar vacio';
+        visibilizarErrores(error);
+    }
 }
 
 function crearFamiliares(indice){
@@ -105,6 +112,7 @@ document.querySelector(".oculto").className = "";
 function visibilizarErrores(error){
     document.querySelector("#mostrar-errores").className = "";
     document.querySelector("#error").textContent = error;
+    document.querySelector("#cantidad-familiares").className = "error";
 }
 
 function resetear(){
