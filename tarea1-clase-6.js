@@ -40,8 +40,13 @@ const $cantidadFamiliares = validarCantidadFamiliares($familiares);
     if($cantidadFamiliares !== 'El numero no puede tener decimales' && $cantidadFamiliares !== 'El campo no puede estar vacio'){
         //console.log($cantidadFamiliares);
         return $cantidadFamiliares
-    }else {
-        let error = 'El numero no puede contener decimales y el campo no puede estar vacio';
+    } else if($cantidadFamiliares === 'El numero no puede tener decimales'){
+        let error = 'El numero no puede tener decimales';
+        //let error = 'El numero no puede contener decimales y el campo no puede estar vacio';
+        visibilizarErrores(error);
+    } else if($cantidadFamiliares === 'El campo no puede estar vacio'){
+        let error = 'El campo no puede estar vacio';
+        //let error = 'El numero no puede contener decimales y el campo no puede estar vacio';
         visibilizarErrores(error);
     }
 }
@@ -73,8 +78,12 @@ function borrarFamiliares(){
 }
 
 function mostrarBotonCalcular(){
-const $nodoDiv = document.querySelector("#boton-calcular");
+    const $nodoDiv = document.querySelector("#boton-calcular");
     $nodoDiv.className = "";
+}
+
+function ocultarBotonCalcular(){
+    const $nodoDiv = document.querySelector('#boton-calcular').className = 'oculto';
 }
 
 document.querySelector("#boton-calcular").onclick = function(event){
@@ -106,7 +115,11 @@ const $resultados = document.querySelector(`#${tipo}-edad`).textContent = valor;
 }
 
 function visibilizarResultados(){
-document.querySelector(".oculto").className = "";
+document.querySelector("#mostrar-resultados").className = "";
+}
+
+function ocultarResultados(){
+    document.querySelector("#mostrar-resultados").className = "oculto";
 }
 
 function visibilizarErrores(error){
@@ -119,7 +132,9 @@ function resetear(){
 let $familiares = document.querySelectorAll(".familiar");
 for(let i = 0; i < $familiares.length; i++){
     $familiares[i].remove();
-}
+    }
+    ocultarResultados();
+    ocultarBotonCalcular();
 }
 
-document.querySelector("#boton-reset").onclick = resetear();
+document.querySelector("#boton-reset").onclick = resetear;
