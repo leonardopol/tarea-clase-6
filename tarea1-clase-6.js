@@ -128,6 +128,12 @@ function visibilizarErrores(error){
     document.querySelector("#cantidad-familiares").className = "error";
 }
 
+function ocultarErrores(){
+    document.querySelector("#mostrar-errores").className = "oculto";
+    document.querySelector("#error").textContent = "";
+    document.querySelector("#cantidad-familiares").className = "";
+}
+
 function resetear(){
 let $familiares = document.querySelectorAll(".familiar");
 for(let i = 0; i < $familiares.length; i++){
@@ -137,4 +143,8 @@ for(let i = 0; i < $familiares.length; i++){
     ocultarBotonCalcular();
 }
 
+function limpiar(){
+    ocultarErrores();
+}
+document.querySelector("#boton-limpiar").onclick = limpiar;
 document.querySelector("#boton-reset").onclick = resetear;
