@@ -26,49 +26,52 @@ document.querySelector("#boton-enviar").onclick = function(event){
         mostrarBotonCalcular();
         contador ++;
     } else {
-        //borrarFamiliares();
+
         crearFamiliares(numeroFamiliares);
-        //mostrarBotonCalcular();
+        
     }
     event.preventDefault();
 }
 
 function obtenerCantidadFamiliares(){
-const $familiares = Number(document.querySelector("#cantidad-familiares").value);
-console.log($familiares);
-const $cantidadFamiliares = validarCantidadFamiliares($familiares);
-    if($cantidadFamiliares !== 'El numero no puede tener decimales' && $cantidadFamiliares !== 'El campo no puede estar vacio'){
-        //console.log($cantidadFamiliares);
-        return $familiares;
-    } else if($cantidadFamiliares === 'El numero no puede tener decimales'){
-        let error = 'El numero no puede tener decimales';
-        //let error = 'El numero no puede contener decimales y el campo no puede estar vacio';
-        visibilizarErrores(error);
-    } else if($cantidadFamiliares === 'El campo no puede estar vacio'){
-        let error = 'El campo no puede estar vacio';
-        //let error = 'El numero no puede contener decimales y el campo no puede estar vacio';
-        visibilizarErrores(error);
-    }
+
+    const $familiares = Number(document.querySelector("#cantidad-familiares").value);
+
+    const $cantidadFamiliares = validarCantidadFamiliares($familiares);
+        if($cantidadFamiliares !== 'El numero no puede tener decimales' && $cantidadFamiliares !== 'El campo no puede estar vacio'){
+            
+            return $familiares;
+        } else if($cantidadFamiliares === 'El numero no puede tener decimales'){
+            let error = 'El numero no puede tener decimales';
+            
+            visibilizarErrores(error);
+        } else if($cantidadFamiliares === 'El campo no puede estar vacio'){
+            let error = 'El campo no puede estar vacio';
+            
+            visibilizarErrores(error);
+        }
 }
 
 function crearFamiliares(numeroFamiliares){
-for(let i = 0; i < numeroFamiliares; i++){
-    let $nodoDiv = document.querySelector("#crearFamiliares");
-    $nodoDiv.className = "integrante";
-    let $labels = document.createElement("labels");
-    let $inputs = document.createElement("input");
-    
-    $inputs.id = `familiar${i}`;
-    $inputs.className = "familiar";
-    $inputs.type = "number";
-    $labels.htmlFor = $inputs.id;
-    $labels.className = "familiar";
-    $labels.textContent = `familiar Nro${i + 1}`;
-    let $saltoDeLinea = document.createElement("br");
-    $nodoDiv.appendChild($labels);
-    $nodoDiv.appendChild($inputs);
-    $nodoDiv.appendChild($saltoDeLinea);
-    }
+
+    for(let i = 0; i < numeroFamiliares; i++){
+
+        let $nodoDiv = document.querySelector("#crearFamiliares");
+        $nodoDiv.className = "integrante";
+        let $labels = document.createElement("labels");
+        let $inputs = document.createElement("input");
+        
+        $inputs.id = `familiar${i}`;
+        $inputs.className = "familiar";
+        $inputs.type = "number";
+        $labels.htmlFor = $inputs.id;
+        $labels.className = "familiar";
+        $labels.textContent = `familiar Nro${i + 1}`;
+        let $saltoDeLinea = document.createElement("br");
+        $nodoDiv.appendChild($labels);
+        $nodoDiv.appendChild($inputs);
+        $nodoDiv.appendChild($saltoDeLinea);
+        }
 }
 
 function borrarFamiliares(){
@@ -87,22 +90,25 @@ function ocultarBotonCalcular(){
 }
 
 document.querySelector("#boton-calcular").onclick = function(event){
-const numeroFamiliares = obtenerCantidadFamiliares();
-if(numeroFamiliares > 0){
-    const edades = leerEdades(numeroFamiliares);
-    const mayorEdad = calcularMayorEdad(edades);
-    const menorEdad = calcularMenorEdad(edades);
-    const promedioEdad = calcularPromedioEdad(edades);
-    mostrarEdad("mayor", mayorEdad);
-    mostrarEdad("menor", menorEdad);
-    mostrarEdad("promedio", promedioEdad);
-    visibilizarResultados();
-    
-}
-event.preventDefault();
+
+    const numeroFamiliares = obtenerCantidadFamiliares();
+
+        if(numeroFamiliares > 0){
+            const edades = leerEdades(numeroFamiliares);
+            const mayorEdad = calcularMayorEdad(edades);
+            const menorEdad = calcularMenorEdad(edades);
+            const promedioEdad = calcularPromedioEdad(edades);
+            mostrarEdad("mayor", mayorEdad);
+            mostrarEdad("menor", menorEdad);
+            mostrarEdad("promedio", promedioEdad);
+            visibilizarResultados();
+            
+        }
+    event.preventDefault();
 }
 
 function leerEdades(numeroFamiliares){
+
     let edades = [];
     for(let i = 0; i < numeroFamiliares; i++){
         edades[i] = Number(document.querySelector(`#familiar${i}`).value);
@@ -111,18 +117,22 @@ function leerEdades(numeroFamiliares){
 }
 
 function mostrarEdad(tipo, valor){
-const $resultados = document.querySelector(`#${tipo}-edad`).textContent = valor;
+
+    const $resultados = document.querySelector(`#${tipo}-edad`).textContent = valor;
 }
 
 function visibilizarResultados(){
-document.querySelector("#mostrar-resultados").className = "";
+
+    document.querySelector("#mostrar-resultados").className = "";
 }
 
 function ocultarResultados(){
+
     document.querySelector("#mostrar-resultados").className = "oculto";
 }
 
 function visibilizarErrores(error){
+
     document.querySelector("#cantidad-familiares").className = "error";
     document.querySelector("#mostrar-errores").className = "";
     document.querySelector("#error").textContent = error;
@@ -130,22 +140,27 @@ function visibilizarErrores(error){
 }
 
 function ocultarErrores(){
+
     document.querySelector("#mostrar-errores").className = "oculto";
     document.querySelector("#error").textContent = "";
     document.querySelector("#cantidad-familiares").className = "error";
 }
 
 function resetear(){
-let $familiares = document.querySelectorAll(".familiar");
-for(let i = 0; i < $familiares.length; i++){
-    $familiares[i].remove();
-    }
-    ocultarResultados();
-    ocultarBotonCalcular();
+
+    let $familiares = document.querySelectorAll(".familiar");
+
+    for(let i = 0; i < $familiares.length; i++){
+        $familiares[i].remove();
+        }
+        ocultarResultados();
+        ocultarBotonCalcular();
 }
 
 function limpiar(){
+
     ocultarErrores();
 }
+
 document.querySelector("#boton-limpiar").onclick = limpiar;
 document.querySelector("#boton-reset").onclick = resetear;
