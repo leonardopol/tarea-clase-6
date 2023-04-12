@@ -19,15 +19,15 @@ Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como
 
 let contador = 0;
 document.querySelector("#boton-enviar").onclick = function(event){
-    const indice = obtenerCantidadFamiliares();
-    if(indice > 0 && contador === 0){
+    const numeroFamiliares = obtenerCantidadFamiliares();
+    if(numeroFamiliares > 0 && contador === 0){
         
-        crearFamiliares(indice);
+        crearFamiliares(numeroFamiliares);
         mostrarBotonCalcular();
         contador ++;
     } else {
         //borrarFamiliares();
-        crearFamiliares(indice);
+        crearFamiliares(numeroFamiliares);
         //mostrarBotonCalcular();
     }
     event.preventDefault();
@@ -39,7 +39,7 @@ console.log($familiares);
 const $cantidadFamiliares = validarCantidadFamiliares($familiares);
     if($cantidadFamiliares !== 'El numero no puede tener decimales' && $cantidadFamiliares !== 'El campo no puede estar vacio'){
         //console.log($cantidadFamiliares);
-        return $cantidadFamiliares
+        return $familiares;
     } else if($cantidadFamiliares === 'El numero no puede tener decimales'){
         let error = 'El numero no puede tener decimales';
         //let error = 'El numero no puede contener decimales y el campo no puede estar vacio';
@@ -51,8 +51,8 @@ const $cantidadFamiliares = validarCantidadFamiliares($familiares);
     }
 }
 
-function crearFamiliares(indice){
-for(let i = 0; i < indice; i++){
+function crearFamiliares(numeroFamiliares){
+for(let i = 0; i < numeroFamiliares; i++){
     let $nodoDiv = document.querySelector("#crearFamiliares");
     $nodoDiv.className = "integrante";
     let $labels = document.createElement("labels");
@@ -87,9 +87,9 @@ function ocultarBotonCalcular(){
 }
 
 document.querySelector("#boton-calcular").onclick = function(event){
-const indice = obtenerCantidadFamiliares();
-if(indice > 0){
-    const edades = leerEdades(indice);
+const numeroFamiliares = obtenerCantidadFamiliares();
+if(numeroFamiliares > 0){
+    const edades = leerEdades(numeroFamiliares);
     const mayorEdad = calcularMayorEdad(edades);
     const menorEdad = calcularMenorEdad(edades);
     const promedioEdad = calcularPromedioEdad(edades);
@@ -102,12 +102,12 @@ if(indice > 0){
 event.preventDefault();
 }
 
-function leerEdades(indice){
-let edades = [];
-for(let i = 0; i < indice; i++){
-    edades[i] = Number(document.querySelector(`#familiar${i}`).value);
-}
-return edades;
+function leerEdades(numeroFamiliares){
+    let edades = [];
+    for(let i = 0; i < numeroFamiliares; i++){
+        edades[i] = Number(document.querySelector(`#familiar${i}`).value);
+    }
+    return edades;
 }
 
 function mostrarEdad(tipo, valor){
@@ -123,15 +123,16 @@ function ocultarResultados(){
 }
 
 function visibilizarErrores(error){
+    document.querySelector("#cantidad-familiares").className = "error";
     document.querySelector("#mostrar-errores").className = "";
     document.querySelector("#error").textContent = error;
-    document.querySelector("#cantidad-familiares").className = "error";
+    
 }
 
 function ocultarErrores(){
     document.querySelector("#mostrar-errores").className = "oculto";
     document.querySelector("#error").textContent = "";
-    document.querySelector("#cantidad-familiares").className = "";
+    document.querySelector("#cantidad-familiares").className = "error";
 }
 
 function resetear(){
