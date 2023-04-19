@@ -19,28 +19,16 @@ Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como
 
 let contador = 0;
 document.querySelector("#boton-enviar").onclick = function(event){
-    const numeroFamiliares = obtenerCantidadFamiliares();
-    if(numeroFamiliares > 0 && contador === 0){
-        
-        crearFamiliares(numeroFamiliares);
-        mostrarBotonCalcular();
-        contador ++;
-    } else {
-
-        crearFamiliares(numeroFamiliares);
-        
-    }
-    event.preventDefault();
-}
-
-function obtenerCantidadFamiliares(){
-
     const $familiares = Number(document.querySelector("#cantidad-familiares").value);
 
     const $cantidadFamiliares = validarCantidadFamiliares($familiares);
         if($cantidadFamiliares !== 'El numero no puede tener decimales' && $cantidadFamiliares !== 'El campo no puede estar vacio'){
-            
-            return $familiares;
+            if(contador === 0){
+                contador++;
+                crearFamiliares($cantidadFamiliares);
+                mostrarBotonCalcular();
+            }
+
         } else if($cantidadFamiliares === 'El numero no puede tener decimales'){
             let error = 'El numero no puede tener decimales';
             
@@ -50,6 +38,7 @@ function obtenerCantidadFamiliares(){
             
             visibilizarErrores(error);
         }
+    event.preventDefault();
 }
 
 function crearFamiliares(numeroFamiliares){
@@ -68,6 +57,7 @@ function crearFamiliares(numeroFamiliares){
         $labels.className = "familiar";
         $labels.textContent = `familiar Nro${i + 1}`;
         let $saltoDeLinea = document.createElement("br");
+        $saltoDeLinea.className = "familiar";
         $nodoDiv.appendChild($labels);
         $nodoDiv.appendChild($inputs);
         $nodoDiv.appendChild($saltoDeLinea);
@@ -91,8 +81,8 @@ function ocultarBotonCalcular(){
 
 document.querySelector("#boton-calcular").onclick = function(event){
 
-    const numeroFamiliares = obtenerCantidadFamiliares();
-
+    //const numeroFamiliares = obtenerCantidadFamiliares();
+    const numeroFamiliares = Number(document.querySelector("#cantidad-familiares").value);
         if(numeroFamiliares > 0){
             const edades = leerEdades(numeroFamiliares);
             const mayorEdad = calcularMayorEdad(edades);
@@ -146,6 +136,13 @@ function ocultarErrores(){
     document.querySelector("#cantidad-familiares").className = "error";
 }
 
+function borrarIntegrantes(){
+    const $familiar = document.querySelectorAll('.familiar');
+    for(let i = 0; i < $familiar.length; i++){
+        $familiar[i].remove();
+    }
+}
+
 function resetear(){
 
     let $familiares = document.querySelectorAll(".familiar");
@@ -153,8 +150,10 @@ function resetear(){
     for(let i = 0; i < $familiares.length; i++){
         $familiares[i].remove();
         }
+        borrarIntegrantes();
         ocultarResultados();
         ocultarBotonCalcular();
+        contador = 0;
 }
 
 function limpiar(){
