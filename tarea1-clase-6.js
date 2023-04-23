@@ -71,12 +71,11 @@ function borrarFamiliares(){
 }
 
 function mostrarBotonCalcular(){
-    const $nodoDiv = document.querySelector("#boton-calcular");
-    $nodoDiv.className = "";
+    const $botonCalcular = document.querySelector("#boton-calcular").className = "";
 }
 
 function ocultarBotonCalcular(){
-    const $nodoDiv = document.querySelector('#boton-calcular').className = 'oculto';
+    const $botonCalcular = document.querySelector('#boton-calcular').className = 'oculto';
 }
 
 document.querySelector("#boton-calcular").onclick = function(event){
