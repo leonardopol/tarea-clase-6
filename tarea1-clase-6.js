@@ -17,14 +17,15 @@ Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como
 */
 
 
-let contador = 0;
+let noHayFamiliaresCreados = true;
 document.querySelector("#boton-enviar").onclick = function(event){
+    
     const $familiares = Number(document.querySelector("#cantidad-familiares").value);
 
     const $cantidadFamiliares = validarCantidadFamiliares($familiares);
         if($cantidadFamiliares !== 'El numero no puede tener decimales' && $cantidadFamiliares !== 'El campo no puede estar vacio'){
-            if(contador === 0){
-                contador++;
+            if(noHayFamiliaresCreados){
+                noHayFamiliaresCreados = false;
                 crearFamiliares($cantidadFamiliares);
                 mostrarBotonCalcular();
             }
@@ -32,11 +33,11 @@ document.querySelector("#boton-enviar").onclick = function(event){
         } else if($cantidadFamiliares === 'El numero no puede tener decimales'){
             let error = 'El numero no puede tener decimales';
             
-            visibilizarErrores(error);
+            visibilizarErroresCantidadDeFamiliares(error);
         } else if($cantidadFamiliares === 'El campo no puede estar vacio'){
             let error = 'El campo no puede estar vacio';
             
-            visibilizarErrores(error);
+            visibilizarErroresCantidadDeFamiliares(error);
         }
     event.preventDefault();
 }
@@ -79,30 +80,37 @@ function ocultarBotonCalcular(){
 }
 
 document.querySelector("#boton-calcular").onclick = function(event){
+    
+    const $numeroFamiliares = Number(document.querySelector("#cantidad-familiares").value);
+    cambiarClaseAfamiliar($numeroFamiliares);
 
-    //const numeroFamiliares = obtenerCantidadFamiliares();
-    const numeroFamiliares = Number(document.querySelector("#cantidad-familiares").value);
-        if(numeroFamiliares > 0){
-            const edades = leerEdades(numeroFamiliares);
-            const mayorEdad = calcularMayorEdad(edades);
-            const menorEdad = calcularMenorEdad(edades);
-            const promedioEdad = calcularPromedioEdad(edades);
-            mostrarEdad("mayor", mayorEdad);
-            mostrarEdad("menor", menorEdad);
-            mostrarEdad("promedio", promedioEdad);
-            visibilizarResultados();
-            
+        if($numeroFamiliares > 0){
+            let edades = [];
+            let contadorErrores = 0;
+            for(let j = 0; j < $numeroFamiliares; j++){        
+                edades[j] = Number(document.querySelector(`#familiar${j}`).value);
+                let validar = validarEdades(edades[j]);
+                if(validar === 'El numero no puede tener decimales' || validar === 'El campo no puede estar vacio'){
+                    let error = validar;
+                    visibilizarErroresEdades(error);
+                    contadorErrores++;
+                }
+            }
+            if(contadorErrores === 0){  
+                calculos(edades);
+            }
         }
     event.preventDefault();
 }
 
-function leerEdades(numeroFamiliares){
-
-    let edades = [];
-    for(let i = 0; i < numeroFamiliares; i++){
-        edades[i] = Number(document.querySelector(`#familiar${i}`).value);
-    }
-    return edades;
+function calculos(edades){
+    const mayorEdad = calcularMayorEdad(edades);
+    const menorEdad = calcularMenorEdad(edades);
+    const promedioEdad = calcularPromedioEdad(edades);
+    mostrarEdad("mayor", mayorEdad);
+    mostrarEdad("menor", menorEdad);
+    mostrarEdad("promedio", promedioEdad);
+    visibilizarResultados();
 }
 
 function mostrarEdad(tipo, valor){
@@ -120,9 +128,26 @@ function ocultarResultados(){
     document.querySelector("#mostrar-resultados").className = "oculto";
 }
 
-function visibilizarErrores(error){
+function visibilizarErroresCantidadDeFamiliares(error){
 
     document.querySelector("#cantidad-familiares").className = "error";
+    document.querySelector("#mostrar-errores").className = "";
+    document.querySelector("#error").textContent = error;
+    
+}
+
+function visibilizarErroresEdades(error){
+    const $numeroFamiliares = Number(document.querySelector("#cantidad-familiares").value);
+    
+    for(let i = 0; i < $numeroFamiliares; i++){
+    
+       if(document.querySelector(`#familiar${i}`).value === ""){
+           document.querySelector(`#familiar${i}`).className = "error";
+       }
+       if(!/^\d*$/.test(document.querySelector(`#familiar${i}`).value)){
+        document.querySelector(`#familiar${i}`).className = "error";
+       } 
+    }
     document.querySelector("#mostrar-errores").className = "";
     document.querySelector("#error").textContent = error;
     
@@ -132,7 +157,7 @@ function ocultarErrores(){
 
     document.querySelector("#mostrar-errores").className = "oculto";
     document.querySelector("#error").textContent = "";
-    document.querySelector("#cantidad-familiares").className = "error";
+    document.querySelector("#cantidad-familiares").className = "";
 }
 
 function borrarIntegrantes(){
@@ -140,6 +165,16 @@ function borrarIntegrantes(){
     for(let i = 0; i < $familiar.length; i++){
         $familiar[i].remove();
     }
+}
+
+function cambiarClaseAfamiliar($numeroFamiliares){
+    document.querySelector("#mostrar-errores").className = "oculto";
+    for(let i = 0; i < $numeroFamiliares; i++){
+    
+        if(document.querySelector(`#familiar${i}`).className === "error"){
+            document.querySelector(`#familiar${i}`).className = "familiar";
+        } 
+     }
 }
 
 function resetear(){
@@ -152,13 +187,14 @@ function resetear(){
         borrarIntegrantes();
         ocultarResultados();
         ocultarBotonCalcular();
-        contador = 0;
+        ocultarErrores();
+        noHayFamiliaresCreados = true;
 }
 
-function limpiar(){
+/*function limpiar(){
 
     ocultarErrores();
-}
+}*/
 
-document.querySelector("#boton-limpiar").onclick = limpiar;
+//document.querySelector("#boton-limpiar").onclick = limpiar;
 document.querySelector("#boton-reset").onclick = resetear;
