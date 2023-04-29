@@ -54,7 +54,7 @@ function calcular(){
     for(let j = 0; j < indice; j++){        
                 salarios[j] = Number(document.querySelector(`#salario${j}`).value);
                 let validar = validarSalarios(salarios[j]);
-                if(validar === 'El numero no puede tener decimales' || validar === 'El campo no puede estar vacio'){
+                if(validar === 'El campo no puede estar vacio'){
                     let error = validar;
                     mostrarError(error);
                     contadorErrores++;
