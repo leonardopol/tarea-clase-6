@@ -49,12 +49,28 @@ function quitarSalario(){
 }
 
 function calcular(){
-    mostrarMayorSalario('mayor', calcularMayorSalarioAnual());
-    mostrarMenorSalario('menor', calcularMenorSalarioAnual());
-    mostrarPromedioSalarioAnual('promedioAnual', calcularSalarioPromedioAnual());
-    mostrarPromedioSalarioMensual('promedioMensual', calcularSalarioPromedioMensual());
-    mostrarResultados();
-    ocultarBotonCalcular();
+    let salarios = [];
+    let contadorErrores = 0;
+    for(let j = 0; j < indice; j++){        
+                salarios[j] = Number(document.querySelector(`#salario${j}`).value);
+                let validar = validarSalarios(salarios[j]);
+                if(validar === 'El numero no puede tener decimales' || validar === 'El campo no puede estar vacio'){
+                    let error = validar;
+                    mostrarError(error);
+                    contadorErrores++;
+                }
+            }
+            if(contadorErrores === 0){  
+                ocultarErrores();
+                mostrarMayorSalario('mayor', calcularMayorSalarioAnual());
+                mostrarMenorSalario('menor', calcularMenorSalarioAnual());
+                mostrarPromedioSalarioAnual('promedioAnual', calcularSalarioPromedioAnual());
+                mostrarPromedioSalarioMensual('promedioMensual', calcularSalarioPromedioMensual());
+                mostrarResultados();
+                ocultarBotonCalcular();
+                mostrarBotonReset();
+            }
+      
 }
 
 function ocultarBotonCalcular(){
@@ -85,12 +101,43 @@ function mostrarPromedioSalarioMensual(tipo, valor) {
     document.querySelector(`#${tipo}-salario`).textContent = valor;
 }
 
+function mostrarError(error){
+    
+        for(let i = 0; i < indice; i++){
+        
+           if(document.querySelector(`#salario${i}`).value === ""){
+               document.querySelector(`#salario${i}`).className = "error";
+           }
+           /*if(!/^\d*$/.test(document.querySelector(`#familiar${i}`).value)){
+            document.querySelector(`#familiar${i}`).className = "error";
+           } */
+        }
+        document.querySelector("#mostrar-errores").className = "";
+        document.querySelector("#error").textContent = error;
+}
+
+function ocultarErrores(){
+
+    document.querySelector("#mostrar-errores").className = "oculto";
+    document.querySelector("#error").textContent = "";
+    
+}
+
+function mostrarBotonReset(){
+    document.querySelector("#boton-reset").className = "";
+}
+
+function ocultarBotonReset(){
+    document.querySelector("#boton-reset").className = "oculto";
+}
+
 function resetear(){
     for(let i = 0; i < indice; i++){
     const $integrantes = document.querySelector(`#integrantes .integrante${i}`);
     $integrantes.remove();
     document.querySelector("#mostrar-resultados").className ="oculto";
     mostrarBotonCalcular();
+    ocultarBotonReset();
     }
     indice = 0;
 }
